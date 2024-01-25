@@ -1,0 +1,113 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/angeko/Bureau/S5/UE libre/Cours/les formulaires/dataForm/dataForm.csproj": {}
+  },
+  "projects": {
+    "/home/angeko/Bureau/S5/UE libre/Cours/les formulaires/dataForm/dataForm.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/angeko/Bureau/S5/UE libre/Cours/les formulaires/dataForm/dataForm.csproj",
+        "projectName": "dataForm",
+        "projectPath": "/home/angeko/Bureau/S5/UE libre/Cours/les formulaires/dataForm/dataForm.csproj",
+        "packagesPath": "/home/angeko/.nuget/packages/",
+        "outputPath": "/home/angeko/Bureau/S5/UE libre/Cours/les formulaires/dataForm/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/angeko/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Syncfusion.Blazor.Calendars": {
+              "target": "Package",
+              "version": "[24.1.41, )"
+            },
+            "Syncfusion.Blazor.Dataform": {
+              "target": "Package",
+              "version": "[24.1.41, )"
+            },
+            "Syncfusion.Blazor.Themes": {
+              "target": "Package",
+              "version": "[24.1.41, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.404/RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

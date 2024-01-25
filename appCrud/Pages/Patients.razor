@@ -1,0 +1,84 @@
+<!-- Pages/Patients.razor -->
+@page "/patients"
+@inject ApplicationDbContext _context
+
+<h3>Liste des Patients</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Âge</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patient in patients)
+        {
+            <tr>
+                <td>@patient.Id</td>
+                <td>@patient.FirstName</td>
+                <td>@patient.LastName</td>
+                <td>@patient.Age</td>
+                <td><button @onclick="() => EditPatient(patient)">Éditer</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button @onclick="ShowAddForm">Ajouter un Patient</button>
+
+@if (showAddForm)
+{
+    <div>
+        <h3>Ajouter un Patient</h3>
+        <EditForm Model="@newPatient" OnValidSubmit="AddPatient">
+            <DataAnnotationsValidator />
+            <div>
+                <label>Prénom:</label>
+                <InputText @bind-Value="newPatient.FirstName" />
+            </div>
+            <div>
+                <label>Nom:</label>
+                <InputText @bind-Value="newPatient.LastName" />
+            </div>
+            <div>
+                <label>Âge:</label>
+                <InputNumber @bind-Value="newPatient.Age" />
+            </div>
+            <button type="submit">Ajouter</button>
+        </EditForm>
+    </div>
+}
+
+@code {
+    List<Patient> patients;
+    Patient newPatient = new Patient();
+    bool showAddForm = false;
+
+    protected override void OnInitialized()
+    {
+        patients = _context.Patients.ToList();
+    }
+
+    void ShowAddForm()
+    {
+        showAddForm = true;
+    }
+
+    void AddPatient()
+    {
+        _context.Patients.Add(newPatient);
+        _context.SaveChanges();
+        patients = _context.Patients.ToList();
+        newPatient = new Patient();
+        showAddForm = false;
+    }
+
+    void EditPatient(Patient patient)
+    {
+        
+    }
+}
