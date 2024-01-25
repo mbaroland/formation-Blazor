@@ -1,0 +1,50 @@
+@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel
+@page "/formulaire"
+<SfDataForm ID="MyForm" Model="@FieldTypeModel" Width="50%">
+
+    <FormValidator>
+       <DataAnnotationsValidator></DataAnnotationsValidator>
+    </FormValidator>
+
+    <FormItems>
+       <FormAutoGenerateItems />
+    </FormItems>
+
+</SfDataForm>
+
+@code {
+
+    public class FieldTypes
+    {
+        [Display(Name = "ID")]
+        [Editable(false)]
+        public int IntField { get; set; } = 1002;
+
+        [Required(ErrorMessage = "Please enter your name.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your age.")]
+        [Range(10, 100, ErrorMessage = "Age should between 10 and 100")]
+        [Display(Name = "Age")]
+        public int? Age { get; set; }
+
+        [Required(ErrorMessage = "Please enter your date of birth.")]
+        [Display(Name = "Date Of Birth")]
+        public DateOnly? DOB { get; set; }
+        
+        [Required(ErrorMessage = "Please choose the country.")]
+        public String Country { get; set; }
+
+        [Required(ErrorMessage = "Please agree with the terms.")]
+        [Display(Name = "Terms and Conditions")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Please agree with the terms.")]
+        public bool AcceptTerms { get; set; }
+    }
+    private FieldTypes FieldTypeModel = new FieldTypes();
+}

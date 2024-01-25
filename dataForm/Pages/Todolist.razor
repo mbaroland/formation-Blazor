@@ -1,0 +1,117 @@
+@page "/todolist"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<h3>Liste des Tâches : ( @taches.Count(t => !t.Realisee))</h3>
+
+<div class="row">
+    <div class="col-12 col-md-6 ">
+
+        <ul>
+            @foreach(Tache t in taches)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-baseline ">
+                    <input type="checkbox" class="form-check-input " @bind="t.Realisee"/>
+                    @t.Nom
+                    <button class="btn btn-warning" @onclick="() => tacheSelectionnee = t" > Modifier</button>
+                </li>
+            }
+        </ul>
+        <EditForm Model="@nouvelleTache" OnValidSubmit="@AjouterAsync">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div class="col-12">
+                <InputText placeholder="Nouvelle Tâche"  class="form-control form-control-sm" @bind-Value="nouvelleTache.Nom"/>
+
+            </div>
+            <div class="col-12">
+
+                <button class="btn btn-primary" type="sumit"> Ajouter </button>
+
+            </div>
+
+        </EditForm>
+
+    </div>
+
+    <div class="col-12 col-md-6">
+        @if(tacheSelectionnee !=null){
+            <h3>Modifié la Tache</h3>
+            <EditForm Model="@tacheSelectionnee" OnValidSubmit="@ModifierAsync">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div class="col-12">
+                <InputText  class="form-control form-control-sm" @bind-Value="tacheSelectionnee.Nom"/>
+
+            </div>
+            <div class="col-12">
+                <button class="btn btn-danger" @onclick="SupprimerAsync"> Supprimer </button>
+                <button class="btn btn-primary" type="sumit"> Sauvegarder </button>
+
+            </div>
+
+        </EditForm>
+        }
+
+    </div>
+
+</div>
+
+@code{
+    private List<Tache> taches = new List<Tache>();
+
+    private Tache nouvelleTache = new Tache ();
+    private Tache tacheSelectionnee;
+
+    private String cleStorage ="todolist";
+
+     protected override async Task OnInitializedAsync()
+    {
+        List<Tache> data = await RecupererTacheAsync();
+            if(data!=null){
+                taches= data;
+            }
+        }
+
+    private async void AjouterAsync(){
+
+        taches.Add(new Tache{ Id=Guid.NewGuid().ToString(), Nom = nouvelleTache.Nom, Realisee=false});
+        nouvelleTache= new Tache();
+        await EnregistrerAsync();
+
+    }
+
+
+    private async void ModifierAsync(){
+
+        tacheSelectionnee =null;
+        await EnregistrerAsync();
+
+    }
+
+    private async void SupprimerAsync(){
+
+        if(tacheSelectionnee != null){
+            taches.Remove(tacheSelectionnee);
+            tacheSelectionnee =null;
+            await EnregistrerAsync();
+        }
+
+        
+
+    }
+
+    private async Task<List<Tache>> RecupererTacheAsync(){
+        
+        return await localStorage.GetItemAsync<List<Tache>>(cleStorage);
+        }
+
+    private async Task EnregistrerAsync(){
+        
+         await localStorage.SetItemAsync(cleStorage, taches);
+        }
+
+
+    
+}
